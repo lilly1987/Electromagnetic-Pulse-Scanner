@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <JobDef>
+    <defName>ScanForOreDeposit</defName>
+    <driverClass>ElectromagneticPulseGenerator.JobDriver_ScanForOreDeposit</driverClass>
+    <reportString>scanning for ore deposits</reportString>
+    <playerInterruptible>true</playerInterruptible>
+    <casualInterruptible>true</casualInterruptible>
+    <alwaysShowWeapon>false</alwaysShowWeapon>
+    <collideWithPawns>false</collideWithPawns>
+  </JobDef>
+  <WorkGiverDef>
+    <defName>ScanForOreDeposit</defName>
+    <giverClass>ElectromagneticPulseGenerator.WorkGiver_ScanForOreDeposit</giverClass>
+    <workType>Research</workType>
+    <priorityInType>90</priorityInType>
+    <verb>scan for ore deposits</verb>
+    <gerund>scanning for ore deposits</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <workTags>None</workTags>
+    <directOrderable>true</directOrderable>
+    <scanThings>true</scanThings>
+    <scanCells>false</scanCells>
+  </WorkGiverDef>
+</Defs>

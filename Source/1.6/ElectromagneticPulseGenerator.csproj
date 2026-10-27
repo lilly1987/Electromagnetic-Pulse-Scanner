@@ -1,0 +1,45 @@
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1B2C3D4-E5F6-1234-5678-90ABCDEF1234}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ElectromagneticPulseGenerator</RootNamespace>
+    <AssemblyName>ElectromagneticPulseGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>bin\\Release\\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="*.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\\Microsoft.CSharp.targets" />
+  <Target Name="CopyToAssemblies" BeforeTargets="AfterBuild">
+    <MakeDir Directories="$(MSBuildProjectDirectory)\\..\..\\1.6\Assemblies\\" />
+    <Copy SourceFiles="$(TargetDir)$(TargetFileName)"
+          DestinationFolder="$(MSBuildProjectDirectory)\\..\..\\1.6\Assemblies\\"
+          SkipUnchangedFiles="true" />
+  </Target>
+  <Target Name="AfterBuild">
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\bin" Condition="Exists('$(MSBuildProjectDirectory)\bin')" />
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\obj" Condition="Exists('$(MSBuildProjectDirectory)\obj')" />
+  </Target>
+</Project>

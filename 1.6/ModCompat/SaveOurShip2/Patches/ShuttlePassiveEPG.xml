@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/Vehicles.UpgradeTreeDef[defName="SoS2ShuttleUpgradeTree"]/nodes</xpath>
+    <value>
+      <li>
+        <key>EPGPassiveScanner</key>
+        <label>Passive EPG Scanner</label>
+        <description>Integrate a miniaturized electromagnetic pulse scanner array into the shuttle hull. While deployed on a map, the shuttle will passively reveal hidden mineral deposits over time.</description>
+        <icon>UI/Commands/LaunchReport</icon>
+        <work>8000</work>
+        <gridCoordinate>(10,22)</gridCoordinate>
+        <upgrades>
+          <li Class="Vehicles.StatUpgrade">
+            <vehicleStats>
+              <li>
+                <def>CargoCapacity</def>
+                <value>-100</value>
+                <type>Add</type>
+              </li>
+            </vehicleStats>
+          </li>
+        </upgrades>
+        <researchPrerequisites>
+          <li>GroundPenetratingScanner</li>
+          <li>ShuttleCargo</li>
+        </researchPrerequisites>
+        <ingredients>
+          <ComponentSpacer>1</ComponentSpacer>
+          <ComponentSpacer>2</ComponentSpacer>
+          <Gold>10</Gold>
+        </ingredients>
+      </li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/Vehicles.VehicleDef[defName="SoS2_Shuttle" or defName="SoS2_Shuttle_Heavy" or defName="SoS2_Shuttle_Superheavy"]/comps</xpath>
+    <value>
+      <li Class="ElectromagneticPulseGenerator.CompProperties_PassiveEPGScanner">
+        <requiredUpgradeKey>EPGPassiveScanner</requiredUpgradeKey>
+        <meanTimeBetweenFindsDays>0.5</meanTimeBetweenFindsDays>
+        <maxScanTimeTicks>45000</maxScanTimeTicks>
+      </li>
+    </value>
+  </Operation>
+</Patch>

@@ -46,6 +46,12 @@ namespace ElectromagneticPulseGenerator
                 "EPG_MaxScanTimeTooltip",
                 ref Settings.maxScanTimeTicks,
                 ref maxScanTimeBuffer);
+            listing.Gap();
+
+            listing.CheckboxLabeled(
+                "EPG_ShowDiscoveryMessages".Translate(),
+                ref Settings.showDiscoveryMessages,
+                "EPG_ShowDiscoveryMessagesTooltip".Translate());
 
             listing.End();
         }
@@ -104,6 +110,7 @@ namespace ElectromagneticPulseGenerator
 
         public float meanTimeBetweenFindsDays = 0.5f;
         public int maxScanTimeTicks = 45000;
+        public bool showDiscoveryMessages = true;
         public int MeanTimeBetweenFindsTicks => Mathf.Clamp(
             Mathf.RoundToInt(meanTimeBetweenFindsDays * TicksPerDay),
             MinTicks,
@@ -114,6 +121,7 @@ namespace ElectromagneticPulseGenerator
             base.ExposeData();
             Scribe_Values.Look(ref meanTimeBetweenFindsDays, "meanTimeBetweenFindsDays", 0.5f);
             Scribe_Values.Look(ref maxScanTimeTicks, "maxScanTimeTicks", 45000);
+            Scribe_Values.Look(ref showDiscoveryMessages, "showDiscoveryMessages", true);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {

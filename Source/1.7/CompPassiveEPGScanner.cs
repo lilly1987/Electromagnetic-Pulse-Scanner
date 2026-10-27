@@ -88,10 +88,13 @@ namespace ElectromagneticPulseGenerator
             string oreLabel = oreThing?.def?.label ?? "ore";
             string shuttleLabel = parent.LabelCap;
 
-            Messages.Message(
-                $"{shuttleLabel} passively scanned and revealed a new {oreLabel} deposit.",
-                new TargetInfo(centerCell, map),
-                MessageTypeDefOf.PositiveEvent);
+            if (EPGMod.Settings.showDiscoveryMessages)
+            {
+                Messages.Message(
+                    $"{shuttleLabel} passively scanned and revealed a new {oreLabel} deposit.",
+                    new TargetInfo(centerCell, map),
+                    MessageTypeDefOf.PositiveEvent);
+            }
 
             if (autoMineEnabled)
             {

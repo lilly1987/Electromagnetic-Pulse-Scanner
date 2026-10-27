@@ -5,6 +5,8 @@
   <EPG_MeanTimeTooltip>광맥을 발견하는 평균 간격을 설정합니다. 확률에 따라 설정한 간격보다 빨리 발견할 수도 있습니다. 값이 낮을수록 더 자주 발견합니다. 전력 스캐너와 Save Our Ship 2 수동 스캐너에 함께 적용됩니다. 최소 설정값은 60틱(1초)입니다.</EPG_MeanTimeTooltip>
   <EPG_MaxScanTimeLabel>최대 스캔 시간(보장 발견): {0}</EPG_MaxScanTimeLabel>
   <EPG_MaxScanTimeTooltip>광맥을 발견하지 못한 상태로 스캔할 수 있는 최대 시간을 설정합니다. 이 시간이 지나면 광맥을 확정적으로 발견합니다. 값이 낮을수록 더 자주 발견합니다. 전력 스캐너와 Save Our Ship 2 수동 스캐너에 함께 적용됩니다. 최소 설정값은 60틱(1초)입니다.</EPG_MaxScanTimeTooltip>
+  <EPG_ShowDiscoveryMessages>광맥 발견 알림 표시</EPG_ShowDiscoveryMessages>
+  <EPG_ShowDiscoveryMessagesTooltip>활성화하면 스캐너가 새 광맥을 발견할 때마다 알림을 표시합니다. 비활성화하면 전력 스캐너와 Save Our Ship 2 수동 스캐너의 발견 알림을 숨깁니다. 스캔이나 채굴 동작에는 영향을 주지 않습니다.</EPG_ShowDiscoveryMessagesTooltip>
   <EPG_TimeSeconds>{0:0.##}초 ({1}틱)</EPG_TimeSeconds>
   <EPG_TimeDays>{0:0.##}일 ({1}틱)</EPG_TimeDays>
 </LanguageData>

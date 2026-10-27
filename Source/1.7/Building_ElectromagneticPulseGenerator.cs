@@ -195,7 +195,10 @@ namespace ElectromagneticPulseGenerator
             // Get ore type from the first cell
             Mineable oreThing = map.thingGrid.ThingAt<Mineable>(centerCell);
             string oreLabel = oreThing?.def?.label ?? "ore";
-            Messages.Message($"A new {oreLabel} deposit has been revealed!", new TargetInfo(centerCell, map), MessageTypeDefOf.PositiveEvent);
+            if (EPGMod.Settings.showDiscoveryMessages)
+            {
+                Messages.Message($"A new {oreLabel} deposit has been revealed!", new TargetInfo(centerCell, map), MessageTypeDefOf.PositiveEvent);
+            }
             if (autoMineEnabled)
             {
                 DesignateDepositAndMineShaft(map, deposit);

@@ -10,6 +10,6 @@ namespace ElectromagneticPulseGenerator
         }
     // Mean time between finds, in in-game days
     public float meanTimeBetweenFindsDays = 0.5f;
-    public int maxScanTimeTicks = 45000;
+    public int maxScanTimeTicks = 450;
     }
 }

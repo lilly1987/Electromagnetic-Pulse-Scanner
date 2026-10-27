@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectromagneticPulseGenerator", "Source\ElectromagneticPulseGenerator.csproj", "{8BCAFA83-4139-2667-C12A-130941DF4CD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectromagneticPulseGenerator", "Source\1.7\ElectromagneticPulseGenerator.csproj", "{D4A3F83D-CC47-4B63-BF51-C16A4CD1AB77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,10 +10,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8BCAFA83-4139-2667-C12A-130941DF4CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BCAFA83-4139-2667-C12A-130941DF4CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BCAFA83-4139-2667-C12A-130941DF4CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BCAFA83-4139-2667-C12A-130941DF4CD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4A3F83D-CC47-4B63-BF51-C16A4CD1AB77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4A3F83D-CC47-4B63-BF51-C16A4CD1AB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4A3F83D-CC47-4B63-BF51-C16A4CD1AB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4A3F83D-CC47-4B63-BF51-C16A4CD1AB77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

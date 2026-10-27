@@ -9,4 +9,9 @@
     <li>1.6</li>
     <li IfModActive="kentington.saveourship2">1.6/ModCompat/SaveOurShip2</li>
   </v1.6>
+  <v1.7>
+    <li>/</li>
+    <li>1.7</li>
+    <li IfModActive="kentington.saveourship2">1.7/ModCompat/SaveOurShip2</li>
+  </v1.7>
 </loadFolders>

@@ -201,65 +201,9 @@ namespace ElectromagneticPulseGenerator
             }
             if (autoMineEnabled)
             {
-                DesignateDepositAndMineShaft(map, deposit);
+                EPGAutoMineUtility.DesignateDepositAndMineShaft(map, deposit);
             }
             return true;
-        }
-        // Designate the deposit and a mine shaft for mining
-        private void DesignateDepositAndMineShaft(Map map, List<IntVec3> deposit)
-        {
-            // Designate all deposit cells for mining
-            foreach (var cell in deposit)
-            {
-                Mineable mineable = map.thingGrid.ThingAt<Mineable>(cell);
-                if (mineable != null && mineable.def.building != null && mineable.def.building.isResourceRock)
-                {
-                    if (map.designationManager.DesignationAt(cell, DesignationDefOf.Mine) == null)
-                    {
-                        map.designationManager.AddDesignation(new Designation(mineable, DesignationDefOf.Mine));
-                    }
-                }
-            }
-            // Find closest reachable unfogged cell
-            IntVec3? start = FindClosestUnfoggedCell(map, deposit);
-            if (start == null) return;
-            // Find closest cell in deposit to start
-            IntVec3 end = deposit.OrderBy(c => c.DistanceTo(start.Value)).First();
-            // Designate a straight line (mine shaft), skipping cells already in the deposit
-            foreach (var cell in GenSight.PointsOnLineOfSight(start.Value, end))
-            {
-                if (deposit.Contains(cell)) continue; // Skip already designated deposit cells
-                Mineable mineable = map.thingGrid.ThingAt<Mineable>(cell);
-                if (mineable != null)
-                {
-                    if (map.designationManager.DesignationAt(cell, DesignationDefOf.Mine) == null)
-                    {
-                        map.designationManager.AddDesignation(new Designation(mineable, DesignationDefOf.Mine));
-                    }
-                }
-            }
-        }
-        // Find the closest unfogged and standable cell to the deposit (prefer straight over diagonal if distance is equal)
-        private IntVec3? FindClosestUnfoggedCell(Map map, List<IntVec3> deposit)
-        {
-            int minDist = int.MaxValue;
-            IntVec3? best = null;
-            bool bestIsStraight = false;
-            foreach (var cell in map.AllCells)
-            {
-                if (!map.fogGrid.IsFogged(cell) && cell.Standable(map))
-                {
-                    int dist = Mathf.RoundToInt(deposit.Min(d => d.DistanceTo(cell)));
-                    bool isStraight = deposit.Any(d => d.x == cell.x || d.z == cell.z);
-                    if (dist < minDist || (dist == minDist && isStraight && !bestIsStraight))
-                    {
-                        minDist = dist;
-                        best = cell;
-                        bestIsStraight = isStraight;
-                    }
-                }
-            }
-            return best;
         }
 
         public override void DrawExtraSelectionOverlays()

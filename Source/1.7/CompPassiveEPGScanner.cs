@@ -98,70 +98,10 @@ namespace ElectromagneticPulseGenerator
 
             if (autoMineEnabled)
             {
-                DesignateDepositAndMineShaft(map, deposit);
+                EPGAutoMineUtility.DesignateDepositAndMineShaft(map, deposit);
             }
 
             return true;
-        }
-
-        private void DesignateDepositAndMineShaft(Map map, List<IntVec3> deposit)
-        {
-            foreach (IntVec3 cell in deposit)
-            {
-                Mineable mineable = map.thingGrid.ThingAt<Mineable>(cell);
-                if (mineable != null && mineable.def.building != null && mineable.def.building.isResourceRock)
-                {
-                    if (map.designationManager.DesignationAt(cell, DesignationDefOf.Mine) == null)
-                    {
-                        map.designationManager.AddDesignation(new Designation(mineable, DesignationDefOf.Mine));
-                    }
-                }
-            }
-
-            IntVec3? start = FindClosestUnfoggedCell(map, deposit);
-            if (start == null)
-            {
-                return;
-            }
-
-            IntVec3 end = deposit.OrderBy(c => c.DistanceTo(start.Value)).First();
-            foreach (IntVec3 cell in GenSight.PointsOnLineOfSight(start.Value, end))
-            {
-                if (deposit.Contains(cell))
-                {
-                    continue;
-                }
-
-                Mineable mineable = map.thingGrid.ThingAt<Mineable>(cell);
-                if (mineable != null && map.designationManager.DesignationAt(cell, DesignationDefOf.Mine) == null)
-                {
-                    map.designationManager.AddDesignation(new Designation(mineable, DesignationDefOf.Mine));
-                }
-            }
-        }
-
-        private IntVec3? FindClosestUnfoggedCell(Map map, List<IntVec3> deposit)
-        {
-            int minDist = int.MaxValue;
-            IntVec3? best = null;
-            bool bestIsStraight = false;
-
-            foreach (IntVec3 cell in map.AllCells)
-            {
-                if (!map.fogGrid.IsFogged(cell) && cell.Standable(map))
-                {
-                    int dist = Mathf.RoundToInt(deposit.Min(d => d.DistanceTo(cell)));
-                    bool isStraight = deposit.Any(d => d.x == cell.x || d.z == cell.z);
-                    if (dist < minDist || (dist == minDist && isStraight && !bestIsStraight))
-                    {
-                        minDist = dist;
-                        best = cell;
-                        bestIsStraight = isStraight;
-                    }
-                }
-            }
-
-            return best;
         }
 
         private List<List<IntVec3>> FindUnrevealedOreDeposits(Map map)

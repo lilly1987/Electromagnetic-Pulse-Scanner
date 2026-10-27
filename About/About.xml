@@ -1,9 +1,10 @@
 <ModMetaData>
   <packageId>lilly.electromagneticpulsegenerator</packageId>
-  <name>Electromagnetic Pulse Scanner</name>
+  <name>Electromagnetic Pulse Scanner by lilly</name>
   <author>lilly</author>
   <url></url>
   <description>
+  from https://steamcommunity.com/sharedfiles/filedetails/?id=3521567840
     [English]
     Build an Electromagnetic Pulse Scanner to discover hidden ore deposits on your map. The powered scanner can be operated by a colonist or make progress automatically while powered. Revealed deposits can be designated for mining, including a corridor to reach them. Configure the average discovery interval and maximum guaranteed scan time in the mod settings.
 

@@ -27,7 +27,7 @@
     <Compile Include="*.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\\Microsoft.CSharp.targets" />
-  <Target Name="CopyToAssemblies" BeforeTargets="AfterBuild">
+  <Target Name="CopyToAssemblies" BeforeTargets="AfterBuild" Condition="'$(SkipCopyToAssemblies)' != 'true'">
     <MakeDir Directories="$(MSBuildProjectDirectory)\\..\..\\1.7\Assemblies\\" />
     <Copy SourceFiles="$(TargetDir)$(TargetFileName)"
           DestinationFolder="$(MSBuildProjectDirectory)\\..\..\\1.7\Assemblies\\"

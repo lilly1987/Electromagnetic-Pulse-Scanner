@@ -8,8 +8,13 @@ namespace ElectromagneticPulseGenerator
 {
     public class CompEPGScanner : ThingComp
     {
+        private const int TickInterval = 250;
+
         public CompProperties_EPGScanner Props => (CompProperties_EPGScanner)props;
         public int MaxScanTimeTicks => EPGMod.Settings.maxScanTimeTicks;
+        private int EffectiveTickInterval => Mathf.Min(
+            TickInterval,
+            Mathf.Min(MaxScanTimeTicks, EPGMod.Settings.MeanTimeBetweenFindsTicks));
         private int scanTicks = 0;
         private Building_ElectromagneticPulseGenerator EPG => parent as Building_ElectromagneticPulseGenerator;
 
@@ -29,12 +34,13 @@ namespace ElectromagneticPulseGenerator
             base.CompTick();
             if (!parent.Spawned) return;
             // Run at a rare cadence to keep perf low
-            if (!parent.IsHashIntervalTick(250)) return;
+            int tickInterval = EffectiveTickInterval;
+            if (!parent.IsHashIntervalTick(tickInterval)) return;
             // Only add automatic progress if powered
             var power = parent.TryGetComp<CompPowerTrader>();
             if (power != null && power.PowerOn)
             {
-                AddProgress(250);
+                AddProgress(tickInterval);
             }
         }
 

@@ -7,14 +7,20 @@ namespace ElectromagneticPulseGenerator
     {
         public static EPGSettings Settings { get; private set; }
 
+        private string meanTimeBetweenFindsBuffer;
+        private string maxScanTimeBuffer;
+
         public EPGMod(ModContentPack content) : base(content)
         {
             Settings = GetSettings<EPGSettings>();
+            meanTimeBetweenFindsBuffer = Mathf.RoundToInt(
+                Settings.meanTimeBetweenFindsDays * EPGSettings.TicksPerDay).ToString();
+            maxScanTimeBuffer = Settings.maxScanTimeTicks.ToString();
         }
 
         public override string SettingsCategory()
         {
-            return "Electromagnetic Pulse Scanner";
+            return "EPG_SettingsCategory".Translate();
         }
 
         public override void DoSettingsWindowContents(Rect inRect)
@@ -22,30 +28,86 @@ namespace ElectromagneticPulseGenerator
             Listing_Standard listing = new Listing_Standard();
             listing.Begin(inRect);
 
-            listing.Label($"Mean time between finds: {Settings.meanTimeBetweenFindsDays:0.0} days");
-            Settings.meanTimeBetweenFindsDays = listing.Slider(
-                Settings.meanTimeBetweenFindsDays,
-                EPGSettings.MinDays,
-                EPGSettings.MaxDays);
-
+            int meanTimeBetweenFindsTicks = Mathf.RoundToInt(
+                Settings.meanTimeBetweenFindsDays * EPGSettings.TicksPerDay);
+            DrawTimeSetting(
+                listing,
+                "EPG_MeanTimeLabel",
+                "EPG_MeanTimeTooltip",
+                ref meanTimeBetweenFindsTicks,
+                ref meanTimeBetweenFindsBuffer);
+            Settings.meanTimeBetweenFindsDays =
+                (float)meanTimeBetweenFindsTicks / EPGSettings.TicksPerDay;
             listing.Gap();
 
-            float maxScanDays = Settings.maxScanTimeTicks / 60000f;
-            listing.Label($"Guaranteed scan limit: {maxScanDays:0.0} days ({Settings.maxScanTimeTicks} ticks)");
-            maxScanDays = listing.Slider(maxScanDays, EPGSettings.MinDays, EPGSettings.MaxDays);
-            Settings.maxScanTimeTicks = Mathf.RoundToInt(maxScanDays * 60000f);
+            DrawTimeSetting(
+                listing,
+                "EPG_MaxScanTimeLabel",
+                "EPG_MaxScanTimeTooltip",
+                ref Settings.maxScanTimeTicks,
+                ref maxScanTimeBuffer);
 
             listing.End();
+        }
+
+        private static void DrawTimeSetting(
+            Listing_Standard listing,
+            string labelKey,
+            string tooltipKey,
+            ref int ticks,
+            ref string editBuffer)
+        {
+            ticks = Mathf.Clamp(ticks, EPGSettings.MinTicks, EPGSettings.MaxTicks);
+            listing.Label(labelKey.Translate(FormatTime(ticks)), tipSignal: tooltipKey.Translate());
+
+            Rect row = listing.GetRect(30f);
+            const float inputWidth = 90f;
+            const float gap = 8f;
+            Rect sliderRect = new Rect(row.x, row.y, row.width - inputWidth - gap, row.height);
+            Rect inputRect = new Rect(row.xMax - inputWidth, row.y, inputWidth, row.height);
+
+            int previousTicks = ticks;
+            ticks = Mathf.RoundToInt(Widgets.HorizontalSlider(
+                sliderRect,
+                ticks,
+                EPGSettings.MinTicks,
+                EPGSettings.MaxTicks,
+                roundTo: 1f));
+            if (ticks != previousTicks)
+            {
+                editBuffer = ticks.ToString();
+            }
+
+            Listing_Standard input = new Listing_Standard();
+            input.Begin(inputRect);
+            input.TextFieldNumeric(ref ticks, ref editBuffer, EPGSettings.MinTicks, EPGSettings.MaxTicks);
+            input.End();
+        }
+
+        private static string FormatTime(int ticks)
+        {
+            if (ticks < EPGSettings.TicksPerDay)
+            {
+                return "EPG_TimeSeconds".Translate(ticks / (float)EPGSettings.TicksPerSecond, ticks);
+            }
+
+            return "EPG_TimeDays".Translate(ticks / (float)EPGSettings.TicksPerDay, ticks);
         }
     }
 
     public class EPGSettings : ModSettings
     {
-        public const float MinDays = 0.1f;
-        public const float MaxDays = 10f;
+        public const int TicksPerSecond = 60;
+        public const int TicksPerDay = 60000;
+        public const int MinTicks = TicksPerSecond;
+        public const int MaxTicks = 10 * TicksPerDay;
 
         public float meanTimeBetweenFindsDays = 0.5f;
         public int maxScanTimeTicks = 45000;
+        public int MeanTimeBetweenFindsTicks => Mathf.Clamp(
+            Mathf.RoundToInt(meanTimeBetweenFindsDays * TicksPerDay),
+            MinTicks,
+            MaxTicks);
 
         public override void ExposeData()
         {
@@ -55,8 +117,12 @@ namespace ElectromagneticPulseGenerator
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                meanTimeBetweenFindsDays = Mathf.Clamp(meanTimeBetweenFindsDays, MinDays, MaxDays);
-                maxScanTimeTicks = Mathf.Clamp(maxScanTimeTicks, 6000, 600000);
+                int meanTimeBetweenFindsTicks = Mathf.Clamp(
+                    Mathf.RoundToInt(meanTimeBetweenFindsDays * TicksPerDay),
+                    MinTicks,
+                    MaxTicks);
+                meanTimeBetweenFindsDays = (float)meanTimeBetweenFindsTicks / TicksPerDay;
+                maxScanTimeTicks = Mathf.Clamp(maxScanTimeTicks, MinTicks, MaxTicks);
             }
         }
     }

@@ -4,7 +4,15 @@
   <author>lilly</author>
   <url></url>
   <description>
-    Adds the Electromagnetic Pulse Scanner structure. When powered, it scans the map for hidden ore deposits and allows you to reveal them. Optionally, it can automatically designate revealed deposits and a mineshaft corridor for mining, making resource extraction easier and more efficient.
+    [English]
+    Build an Electromagnetic Pulse Scanner to discover hidden ore deposits on your map. The powered scanner can be operated by a colonist or make progress automatically while powered. Revealed deposits can be designated for mining, including a corridor to reach them. Configure the average discovery interval and maximum guaranteed scan time in the mod settings.
+
+    Save Our Ship 2 support adds a passive scanner upgrade for shuttles, with an optional auto-mine toggle.
+
+    [한국어]
+    전자기 펄스 스캐너를 건설해 맵에 숨겨진 광맥을 찾아보세요. 전력 스캐너는 정착민이 직접 조작하거나 전력이 공급되는 동안 자동으로 스캔합니다. 발견한 광맥과 광맥까지 이어지는 채굴 통로를 채굴 지정할 수 있습니다. 모드 설정에서 평균 발견 간격과 최대 스캔 시간(보장 발견)을 조정할 수 있습니다.
+
+    Save Our Ship 2 호환 기능으로 셔틀에 수동 스캐너 업그레이드를 추가하며, 자동 채굴 설정도 사용할 수 있습니다.
   </description>
   <supportedVersions>
     <li>1.5</li>

@@ -20,6 +20,9 @@ namespace ElectromagneticPulseGenerator
 
         public CompProperties_PassiveEPGScanner Props => (CompProperties_PassiveEPGScanner)props;
         private int MaxScanTimeTicks => EPGMod.Settings.maxScanTimeTicks;
+        private int EffectiveTickInterval => Mathf.Min(
+            TickInterval,
+            Mathf.Min(MaxScanTimeTicks, EPGMod.Settings.MeanTimeBetweenFindsTicks));
 
         public override void PostExposeData()
         {
@@ -37,7 +40,8 @@ namespace ElectromagneticPulseGenerator
                 return;
             }
 
-            if (!parent.IsHashIntervalTick(TickInterval))
+            int tickInterval = EffectiveTickInterval;
+            if (!parent.IsHashIntervalTick(tickInterval))
             {
                 return;
             }
@@ -47,7 +51,7 @@ namespace ElectromagneticPulseGenerator
                 return;
             }
 
-            AddProgress(TickInterval);
+            AddProgress(tickInterval);
         }
 
         private void AddProgress(int amount)

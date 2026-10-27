@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <EPG_SettingsCategory>전자기 펄스 스캐너</EPG_SettingsCategory>
+  <EPG_MeanTimeLabel>광맥 발견 평균 간격: {0}</EPG_MeanTimeLabel>
+  <EPG_MeanTimeTooltip>광맥을 발견하는 평균 간격을 설정합니다. 확률에 따라 설정한 간격보다 빨리 발견할 수도 있습니다. 값이 낮을수록 더 자주 발견합니다. 전력 스캐너와 Save Our Ship 2 수동 스캐너에 함께 적용됩니다. 최소 설정값은 60틱(1초)입니다.</EPG_MeanTimeTooltip>
+  <EPG_MaxScanTimeLabel>최대 스캔 시간(보장 발견): {0}</EPG_MaxScanTimeLabel>
+  <EPG_MaxScanTimeTooltip>광맥을 발견하지 못한 상태로 스캔할 수 있는 최대 시간을 설정합니다. 이 시간이 지나면 광맥을 확정적으로 발견합니다. 값이 낮을수록 더 자주 발견합니다. 전력 스캐너와 Save Our Ship 2 수동 스캐너에 함께 적용됩니다. 최소 설정값은 60틱(1초)입니다.</EPG_MaxScanTimeTooltip>
+  <EPG_TimeSeconds>{0:0.##}초 ({1}틱)</EPG_TimeSeconds>
+  <EPG_TimeDays>{0:0.##}일 ({1}틱)</EPG_TimeDays>
+</LanguageData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <EPG_SettingsCategory>Electromagnetic Pulse Scanner</EPG_SettingsCategory>
+  <EPG_MeanTimeLabel>Average time between ore finds: {0}</EPG_MeanTimeLabel>
+  <EPG_MeanTimeTooltip>Sets the average interval between ore deposit discoveries. The scanner can find ore sooner by chance; a shorter interval makes discoveries more frequent. Applies to both the powered scanner and the Save Our Ship 2 passive scanner. Minimum: 60 ticks (1 second).</EPG_MeanTimeTooltip>
+  <EPG_MaxScanTimeLabel>Maximum time before a guaranteed find: {0}</EPG_MaxScanTimeLabel>
+  <EPG_MaxScanTimeTooltip>Sets the longest scan interval without a discovery. If no ore is found by this time, the scanner reveals a deposit automatically. Lower values make discoveries more frequent. Applies to both scanner types. Minimum: 60 ticks (1 second).</EPG_MaxScanTimeTooltip>
+  <EPG_TimeSeconds>{0:0.##} seconds ({1} ticks)</EPG_TimeSeconds>
+  <EPG_TimeDays>{0:0.##} days ({1} ticks)</EPG_TimeDays>
+</LanguageData>
